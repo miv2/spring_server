@@ -1,9 +1,9 @@
 package com.miv.spring_server.domain.location.entity;
 
-import com.miv.spring_server.domain.user.entity.User;
 import org.hibernate.annotations.Comment;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LOCATION")
@@ -22,17 +22,26 @@ public class Location {
     @Column(name = "longitude")
     private double longitude;
 
-    @Comment("유저")
-    @JoinColumn(name = "user_id")
-    @OneToOne
-    private User user;
+    @Comment("저장일시")
+    @Column(name = "save_datetime")
+    private LocalDateTime saveDateTime;
+
+    @Comment("uuid")
+    @Column(name = "uuid")
+    private String uuid;
 
     public Location() {}
 
-    public Location(double latitude, double longitude, User user) {
+    public Location (double latitude, double longitude,
+                    LocalDateTime saveDateTime, String uuid) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.user = user;
+        this.saveDateTime = saveDateTime;
+        this.uuid = uuid;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public double getLatitude() {
@@ -43,13 +52,11 @@ public class Location {
         return longitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public LocalDateTime getSaveDateTime() {
+        return saveDateTime;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public String getUuid() {
+        return uuid;
     }
-
-
 }

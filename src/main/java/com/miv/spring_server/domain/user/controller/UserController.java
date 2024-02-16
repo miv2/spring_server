@@ -22,7 +22,15 @@ public class UserController {
     @GetMapping
     public ApiResponse userInfo() {
         User user = securityService.findLoggedInUserPrincipal().getUser();
-        return new ApiDataResponse<>(new UserInfoResponse(user.getUserName(), user.getEmail()));
+
+        String uuid = user.getUuid(); // 203aa63a-392e-484a-8ed1-4e749c087bea
+        int indexOf = uuid.indexOf("-"); // 8
+        String recommenderCode = uuid.substring(0, indexOf);
+
+        // System.out.println(recommenderCode);
+
+        return new ApiDataResponse<>(new UserInfoResponse(user.getUserName(), user.getEmail(),
+                user.getUuid()));
     }
 
 }

@@ -6,7 +6,10 @@ import com.miv.spring_server.domain.location.entity.Location;
 import com.miv.spring_server.domain.location.repository.LocationRepository;
 import com.miv.spring_server.domain.user.entity.User;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LocationServiceImpl implements LocationService {
@@ -18,23 +21,28 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationResponseDto getLocation(User user) {
-        Location locationInfo = locationRepository.findByUser(user);
-        return new LocationResponseDto(locationInfo.getLatitude(), locationInfo.getLongitude());
+    public List<LocationResponseDto> getLocation(User user) {
+        List<Location> locationInfo = locationRepository.findAllByUuid(user.getUuid());
+        return toResponse(locationInfo);
     }
 
     @Override
-    public void updateLocation(LocationRequestDto locationRequestDto, User user) {
-        Location locationInfo = locationRepository.findByUser(user);
+    public void saveLocation(LocationRequestDto locationRequestDto, User user) {
 
-        if(!ObjectUtils.isEmpty(locationInfo)) {
-            locationInfo.setLatitude(locationRequestDto.getLatitude());
-            locationInfo.setLongitude(locationRequestDto.getLongitude());
-            locationRepository.save(locationInfo);
-        } else {
-            Location savedLocation = new Location(locationRequestDto.getLatitude(), locationRequestDto.getLongitude(), user);
-            locationRepository.save(savedLocation);
-        }
+        Location location = new Location(
+                locationRequestDto.getLatitude(), locationRequestDto.getLongitude(),
+                LocalDateTime.now(), user.getUuid());
+
+        locationRepository.save(location);
     }
 
+    @Override
+    public LocationResponseDto toResponse(Location location) {
+        return new LocationResponseDto(location);
+    }
+
+    @Override
+    public List<LocationResponseDto> toResponse(List<Location> entities) {
+        return entities.stream().map(this::toResponse).collect(Collectors.toList());
+    }
 }

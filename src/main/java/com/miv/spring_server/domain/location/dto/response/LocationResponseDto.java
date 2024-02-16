@@ -1,13 +1,24 @@
 package com.miv.spring_server.domain.location.dto.response;
 
-public class LocationResponseDto {
+import com.miv.spring_server.domain.location.entity.Location;
 
+import java.time.LocalDateTime;
+
+public class LocationResponseDto {
+    private Long id;
     private double latitude;
     private double longitude;
+    private LocalDateTime saveDateTime;
 
-    public LocationResponseDto(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
+    public LocationResponseDto(Location location) {
+        this.id = location.getId();
+        this.latitude = location.getLatitude();
+        this.longitude = location.getLatitude();
+        this.saveDateTime = location.getSaveDateTime();
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public double getLatitude() {
@@ -16,5 +27,9 @@ public class LocationResponseDto {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public LocalDateTime getSaveDateTime() {
+        return saveDateTime;
     }
 }
