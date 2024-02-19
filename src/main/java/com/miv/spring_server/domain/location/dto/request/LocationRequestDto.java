@@ -6,6 +6,7 @@ public class LocationRequestDto {
     private double longitude;
 
     public double getLatitude() {
+
         return latitude;
     }
 

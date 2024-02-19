@@ -1,11 +1,13 @@
 package com.miv.spring_server.domain.location.service;
 
+import com.miv.spring_server.domain.location.dto.request.LocationListRequestDto;
 import com.miv.spring_server.domain.location.dto.request.LocationRequestDto;
 import com.miv.spring_server.domain.location.dto.response.LocationResponseDto;
 import com.miv.spring_server.domain.location.entity.Location;
 import com.miv.spring_server.domain.location.repository.LocationRepository;
 import com.miv.spring_server.domain.user.entity.User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,14 +28,19 @@ public class LocationServiceImpl implements LocationService {
         return toResponse(locationInfo);
     }
 
+    @Transactional
     @Override
-    public void saveLocation(LocationRequestDto locationRequestDto, User user) {
+    public void saveLocation(LocationListRequestDto locationRequestDto, User user) {
 
-        Location location = new Location(
-                locationRequestDto.getLatitude(), locationRequestDto.getLongitude(),
-                LocalDateTime.now(), user.getUuid());
+        List<LocationRequestDto> locationLists = locationRequestDto.getLocationList();
 
-        locationRepository.save(location);
+        for(LocationRequestDto locationList : locationLists) {
+            Location location = new Location(
+                    locationList.getLatitude(), locationList.getLongitude(),
+                    LocalDateTime.now(), user.getUuid()
+            );
+            locationRepository.save(location);
+        }
     }
 
     @Override

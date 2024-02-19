@@ -1,5 +1,6 @@
 package com.miv.spring_server.domain.location.service;
 
+import com.miv.spring_server.domain.location.dto.request.LocationListRequestDto;
 import com.miv.spring_server.domain.location.dto.request.LocationRequestDto;
 import com.miv.spring_server.domain.location.dto.response.LocationResponseDto;
 import com.miv.spring_server.domain.location.entity.Location;
@@ -11,7 +12,7 @@ public interface LocationService {
 
     List<LocationResponseDto> getLocation(User user);
 
-    void saveLocation(LocationRequestDto locationRequestDto, User user);
+    void saveLocation(LocationListRequestDto locationRequestDto, User user);
 
     LocationResponseDto toResponse(Location location);
 

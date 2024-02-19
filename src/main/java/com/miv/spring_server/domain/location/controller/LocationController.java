@@ -3,6 +3,7 @@ package com.miv.spring_server.domain.location.controller;
 import com.miv.spring_server.auth.security.SecurityService;
 import com.miv.spring_server.common.response.ApiDataResponse;
 import com.miv.spring_server.common.response.ApiResponse;
+import com.miv.spring_server.domain.location.dto.request.LocationListRequestDto;
 import com.miv.spring_server.domain.location.dto.request.LocationRequestDto;
 import com.miv.spring_server.domain.location.dto.response.LocationInfoResponseDto;
 import com.miv.spring_server.domain.location.dto.response.LocationResponseDto;
@@ -33,7 +34,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public ApiResponse updateLocation(@RequestBody LocationRequestDto locationRequestDto) {
+    public ApiResponse saveLocation(@RequestBody LocationListRequestDto locationRequestDto) {
         User user = securityService.findLoggedInUserPrincipal().getUser();
         locationService.saveLocation(locationRequestDto, user);
         return new ApiDataResponse<>("");
