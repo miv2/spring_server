@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface LocationRepository extends JpaRepository<Location, Long> {
     List<Location> findAllByUuid(@Param("uuid") String uuid);
+
+    List<Location> findAllByUuidContains(@Param("uuid") String uuid);
 }

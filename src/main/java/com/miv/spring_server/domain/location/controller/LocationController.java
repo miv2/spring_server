@@ -26,11 +26,17 @@ public class LocationController {
     }
 
     @GetMapping
-    public ApiResponse getLocation() {
+    public ApiResponse getLocationList() {
         User user = securityService.findLoggedInUserPrincipal().getUser();
         List<LocationResponseDto> locations = locationService.getLocation(user);
 
         return new ApiDataResponse<>(new LocationInfoResponseDto(user.getUserName(), locations));
+    }
+
+    @GetMapping("/{recommenderId}")
+    public ApiResponse getRecommenderLocation(@PathVariable String recommenderId) {
+        System.out.println(":::::::::::::::::::::::::");
+        return new ApiDataResponse<>(locationService.recommenderLocation(recommenderId));
     }
 
     @PostMapping

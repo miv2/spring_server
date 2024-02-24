@@ -13,7 +13,7 @@ public class LocationResponseDto {
     public LocationResponseDto(Location location) {
         this.id = location.getId();
         this.latitude = location.getLatitude();
-        this.longitude = location.getLatitude();
+        this.longitude = location.getLongitude();
         this.saveDateTime = location.getSaveDateTime();
     }
 

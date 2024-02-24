@@ -29,8 +29,10 @@ public class UserController {
 
         // System.out.println(recommenderCode);
 
-        return new ApiDataResponse<>(new UserInfoResponse(user.getUserName(), user.getEmail(),
-                user.getUuid()));
+        return new ApiDataResponse<>(
+                new UserInfoResponse(user.getUserName(), user.getEmail(),
+                user.getUuid(), recommenderCode)
+        );
     }
 
 }

@@ -28,6 +28,12 @@ public class LocationServiceImpl implements LocationService {
         return toResponse(locationInfo);
     }
 
+    @Override
+    public List<LocationResponseDto> recommenderLocation(String recommenderId) {
+        List<Location> friendLocationList = locationRepository.findAllByUuidContains(recommenderId);
+        return toResponse(friendLocationList);
+    }
+
     @Transactional
     @Override
     public void saveLocation(LocationListRequestDto locationRequestDto, User user) {

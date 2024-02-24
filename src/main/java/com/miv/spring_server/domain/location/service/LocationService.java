@@ -14,6 +14,8 @@ public interface LocationService {
 
     void saveLocation(LocationListRequestDto locationRequestDto, User user);
 
+    List<LocationResponseDto> recommenderLocation(String recommenderId);
+
     LocationResponseDto toResponse(Location location);
 
     List<LocationResponseDto> toResponse(List<Location> entities);
