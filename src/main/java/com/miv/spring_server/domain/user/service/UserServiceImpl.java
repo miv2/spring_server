@@ -1,6 +1,7 @@
 package com.miv.spring_server.domain.user.service;
 
 import com.miv.spring_server.common.handler.ApiError;
+import com.miv.spring_server.domain.user.dto.request.UserInfoRequest;
 import com.miv.spring_server.domain.user.entity.User;
 import com.miv.spring_server.domain.user.repository.UserRepository;
 import io.jsonwebtoken.JwtException;
@@ -24,6 +25,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveRefreshToken(User user, String refreshToken) {
         user.setRefreshToken(refreshToken);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void updateUserInfo(User user, UserInfoRequest userInfoRequest) {
+        user.setUserName(userInfoRequest.getUserName());
         userRepository.save(user);
     }
 }

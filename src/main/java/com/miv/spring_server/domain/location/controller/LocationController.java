@@ -35,7 +35,6 @@ public class LocationController {
 
     @GetMapping("/{recommenderId}")
     public ApiResponse getRecommenderLocation(@PathVariable String recommenderId) {
-        System.out.println(":::::::::::::::::::::::::");
         return new ApiDataResponse<>(locationService.recommenderLocation(recommenderId));
     }
 
