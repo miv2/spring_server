@@ -1,8 +1,8 @@
 package com.miv.spring_server.domain.location.service;
 
 import com.miv.spring_server.domain.location.dto.request.LocationListRequestDto;
-import com.miv.spring_server.domain.location.dto.request.LocationRequestDto;
 import com.miv.spring_server.domain.location.dto.response.LocationResponseDto;
+import com.miv.spring_server.domain.location.dto.response.RecommenderLocationResponse;
 import com.miv.spring_server.domain.location.entity.Location;
 import com.miv.spring_server.domain.user.entity.User;
 
@@ -14,10 +14,12 @@ public interface LocationService {
 
     void saveLocation(LocationListRequestDto locationRequestDto, User user);
 
-    List<LocationResponseDto> recommenderLocation(String recommenderId);
+    RecommenderLocationResponse recommenderLocation(String recommenderId);
 
     LocationResponseDto toResponse(Location location);
 
     List<LocationResponseDto> toResponse(List<Location> entities);
+
+    List<LocationResponseDto> toLocationResponse(List<Location> entities);
 
 }
