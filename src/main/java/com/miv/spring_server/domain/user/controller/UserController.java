@@ -3,19 +3,20 @@ package com.miv.spring_server.domain.user.controller;
 import com.miv.spring_server.auth.security.SecurityService;
 import com.miv.spring_server.common.response.ApiDataResponse;
 import com.miv.spring_server.common.response.ApiResponse;
+import com.miv.spring_server.domain.user.dto.request.UserInfoRequest;
 import com.miv.spring_server.domain.user.dto.response.UserInfoResponse;
 import com.miv.spring_server.domain.user.entity.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.miv.spring_server.domain.user.service.UserService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/member")
 public class UserController {
-
+    private final UserService userService;
     private final SecurityService securityService;
 
-    public UserController(SecurityService securityService) {
+    public UserController(UserService userService, SecurityService securityService) {
+        this.userService = userService;
         this.securityService = securityService;
     }
 
@@ -33,6 +34,13 @@ public class UserController {
                 new UserInfoResponse(user.getUserName(), user.getEmail(),
                 user.getUuid(), recommenderCode)
         );
+    }
+
+    @PostMapping
+    public ApiResponse modifyUserInfo(@RequestBody UserInfoRequest userInfoRequest) {
+        User user = securityService.findLoggedInUserPrincipal().getUser();
+        userService.updateUserInfo(user, userInfoRequest);
+        return new ApiDataResponse<>("닉네임 변경완료");
     }
 
 }

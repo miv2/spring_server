@@ -81,6 +81,10 @@ public class User {
         return this;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     @Override
     public String toString() {
         return "User{" +

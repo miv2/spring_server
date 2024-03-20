@@ -1,5 +1,6 @@
 package com.miv.spring_server.domain.user.service;
 
+import com.miv.spring_server.domain.user.dto.request.UserInfoRequest;
 import com.miv.spring_server.domain.user.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -18,4 +19,10 @@ public interface UserService {
      * @return
      */
     User findUserForJwt(String uuid);
+
+    /**
+     * 닉네임 변경
+     * @param userInfoRequest
+     */
+    void updateUserInfo(User user, UserInfoRequest userInfoRequest);
 }
