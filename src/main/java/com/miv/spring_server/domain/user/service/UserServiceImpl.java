@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUserInfo(User user, UserInfoRequest userInfoRequest) {
-        user.setUserName(userInfoRequest.getUserName());
+        user.setUserInfo(userInfoRequest.getUserName(), userInfoRequest.getUserColor());
         userRepository.save(user);
     }
 }

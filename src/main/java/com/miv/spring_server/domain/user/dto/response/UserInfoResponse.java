@@ -7,12 +7,12 @@ public class UserInfoResponse {
     private String recommenderCode;
     private String userColor;
 
-    public UserInfoResponse(String name, String email, String uuid, String recommenderCode) {
+    public UserInfoResponse(String name, String email, String uuid, String recommenderCode, String color) {
         this.name = name;
         this.email = email;
         this.uuid = uuid;
         this.recommenderCode = recommenderCode;
-        userColor = "";
+        this.userColor = color;
     }
 
     public String getName() {

@@ -32,7 +32,7 @@ public class UserController {
 
         return new ApiDataResponse<>(
                 new UserInfoResponse(user.getUserName(), user.getEmail(),
-                user.getUuid(), recommenderCode)
+                user.getUuid(), recommenderCode, user.getColor())
         );
     }
 

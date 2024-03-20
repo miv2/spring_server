@@ -36,6 +36,10 @@ public class User {
     @Column(name = "refresh_token", length = 500)
     private String refreshToken;
 
+    @Comment("색상표")
+    @Column(name = "color")
+    private String color;
+
     @Comment("권한")
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "member_id", nullable = false)
@@ -63,6 +67,14 @@ public class User {
         return uuid;
     }
 
+    public String getRefreshToken() {
+        return refreshToken;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
     public List<UserRole> getRoles() {
         return roles;
     }
@@ -81,22 +93,12 @@ public class User {
         return this;
     }
 
-    public void setUserName(String userName) {
+    public void setUserInfo(String userName, String color) {
         this.userName = userName;
+        this.color = color;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", uuid='" + uuid + '\'' +
-                ", refreshToken='" + refreshToken + '\'' +
-                ", roles=" + roles +
-                '}';
-    }
+
 
     public static Builder builder() {
         return new Builder();

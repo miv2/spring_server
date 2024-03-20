@@ -39,7 +39,7 @@ public class LocationServiceImpl implements LocationService {
         List<LocationResponseDto> locationResponse = toLocationResponse(recommenderLocationList);
         return new RecommenderLocationResponse(
                 recommenderUser.getUserName(),
-                "#FF00FF",
+                recommenderUser.getColor(),
                 locationResponse);
     }
 
